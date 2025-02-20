@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🌟 Regex Helper</title>
+    <style>
+        /* General Styles */
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #FF9A8B , #FF6A88, #C779D0, #6FB1FC);
+            color: #333;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .container {
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            max-width: 600px;
+            width: 100%;
+            text-align: center;
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            color: blueviolet;
+            margin-bottom: 20px;
+        }
+
+        h2 {
+            font-size: 1.8rem;
+            color: #ff6f61;
+            margin-top: 20px;
+        }
+
+        label {
+            font-size: 1.2rem;
+            color: #555;
+            display: block;
+            margin-bottom: 10px;
+        }
+
+        textarea, input[type="text"] {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            font-size: 1rem;
+            outline: none;
+            transition: border-color 0.3s ease;
+        }
+
+        textarea:focus, input[type="text"]:focus {
+            border-color: #ff6f61;
+        }
+
+        input[type="submit"] {
+            background: #ff6f61;
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 8px;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: background 0.3s ease;
+        }
+
+        input[type="submit"]:hover {
+            background: #ff3b2f;
+        }
+
+        ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        li {
+            background: #f8f9fa;
+            padding: 10px;
+            margin: 10px 0;
+            border-radius: 8px;
+            font-size: 1rem;
+            color: #333;
+        }
+
+        .valid {
+            color: #28a745;
+            font-weight: bold;
+        }
+
+        .invalid {
+            color: #dc3545;
+            font-weight: bold;
+        }
+
+        .emoji {
+            font-size: 1.5rem;
+            margin-right: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🌟 Regex Matching Web App</h1>
+        
+        <!-- Regex Matching Form -->
+        <form action="/results" method="POST">
+            <label for="test_string">📝 Enter Your Text:</label>
+            <textarea id="test_string" name="test_string" rows="4" placeholder="Type your text here...">{{ test_string if test_string else '' }}</textarea>
+            <label for="regex">🔍 Enter Regex Pattern:</label>
+            <input type="text" id="regex" name="regex" placeholder="Type your regex pattern..." value="{{ regex if regex else '' }}">
+            <input type="submit" value="🚀 Find Matches">
+        </form>
+
+        <!-- Display Matches -->
+        {% if matches %}
+            <h2>🎯 Found Matches:</h2>
+            <ul>
+                {% for match in matches %}
+                    <li>✅ {{ match }}</li>
+                {% endfor %}
+            </ul>
+        {% endif %}
+
+        <!-- Email Validation Form -->
+        <h2>📧 Validate Email</h2>
+        <form action="/validate-email" method="POST">
+            <label for="email">📧 Enter Email Address:</label>
+            <input type="text" id="email" name="email" placeholder="Type your email..." value="{{ email if email else '' }}">
+            <input type="submit" value="🔍 Validate Email">
+        </form>
+
+        <!-- Display Email Validation Result -->
+        {% if is_valid is not none %}
+            <p>
+                The email <strong>{{ email }}</strong> is 
+                {% if is_valid %}
+                    <span class="valid">✅ valid</span>.
+                {% else %}
+                    <span class="invalid">❌ invalid</span>.
+                {% endif %}
+            </p>
+        {% endif %}
+    </div>
+</body>
+</html>
